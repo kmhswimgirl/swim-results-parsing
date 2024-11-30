@@ -6,7 +6,7 @@ file.close()
 
 print_next_lines = 0
 
-choice = input("Name (n) or Event (e)?")
+choice = input("Name (n) or Event (e)?: ")
 
 if(choice == "n"):
     name = input("Enter Name: " )
@@ -27,8 +27,21 @@ if(choice == "n"):
 if (choice == "e"):
     dist = input("distance (yds): " )
     stroke = input("Stroke: ")
+    isRelay = input("Relay? (y/n): ")
 
-    event = dist + " Yard " + stroke #combines entries to form event name
+    def filterStroke(eventType):
+        if(eventType == "Freestyle" or "FR" or "Free" or "fr" or "free" or "freestyle"):
+            return("Freestyle")
+        if(eventType == "Breaststroke" or "BR" or "Breast" or "br" or "breast" or "breaststroke"):
+            return("Breaststroke")
+        if(eventType == "Butterfly" or "FL" or "Fly" or "fl" or "fly" or "butterfly"):
+            return("Butterfly")
+        if(eventType == "Backstroke" or "BK" or "Back" or "bk" or "back" or "backstroke"):
+            return("Butterfly")
+        if(eventType == "Individual Medley" or "IM" or "Ind Med" or "im" or "ind med" or "individual medley"):
+            return("Individual Medley")
+
+    event = dist + " Yard " + filterStroke(stroke) #combines entries to form event name
 
     print("Swim Data for "+ event)
     print("")
