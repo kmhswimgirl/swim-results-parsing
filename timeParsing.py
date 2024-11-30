@@ -1,12 +1,20 @@
 import re
 
-file = open('/Users/kmh_swimgirl/PythonOne/MeetData/102724FullResults.txt', 'r') # opens up the meet data file
+file = open('/Users/kmh_swimgirl/PythonOne/MeetData/20241027FullResults.txt', 'r') # opens up the meet data file
 lines = file.readlines() # reads lines one at a time
 file.close() # closes the file
 
 print_next_lines = 0 # initializes the line counter
 
-choice = input("Name (n) or Event (e)?: ") # input filed for Name vs Event sorting
+choice = input("Name (n), Event (e) or Meet Info (i)?: ") # input filed for Name vs Event sorting
+
+eventMarker = '<b>'
+line_number = 7
+
+def getEventList():
+    for line in lines:
+        if eventMarker in line:
+            print(line)
 
 # process for sorting time data by name 
 if(choice == "n"): 
@@ -51,7 +59,7 @@ if (choice == "e"): # sorting meet data by event
         if(genInput == "w"):
             return("Women")
 
-    event = filterGender(gender)+ " " + dist + " Yard " + filterStroke(stroke) # combines entries to form event name
+    event = filterGender(gender)+ " " + dist + " Yard " + filterStroke(stroke) # combines inputs to form event name
 
     print("=============== " + "Swim Data for "+ event + " ===============")
     print("")
@@ -68,5 +76,14 @@ if (choice == "e"): # sorting meet data by event
             print_next_lines = 50
             origVal = 50
 
-if (choice != "n" and choice != "e" ): # Error messages
+if (choice == "i"):
+    print("")
+    print(f"{lines[line_number - 1]}")
+    print("================ Event List ================")
+    print("")
+    getEventList()
+
+ 
+
+if (choice != "n" and choice != "e" and choice != "i"): # Error messages
     print("ERROR: Invalid Entry!")
